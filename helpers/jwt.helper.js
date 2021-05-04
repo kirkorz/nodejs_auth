@@ -5,7 +5,7 @@ let generateToken = (user,secretSignature,tokenLife)=>{
     return new Promise((res,rej)=>{
         jwt.sign({id:user._id,role:user.role},secretSignature,
             {
-                algorithm:"HS256",
+                algorithm:"RS256",
                 expiresIn: tokenLife,
             },
             (error,token)=>{

@@ -48,7 +48,8 @@ let login = async(req,res) =>{
     try{
         const user = await Dbquery.login(req.body);
         const accessToken = await jwtHelper.generateToken(user,key.private,accessTokenLife);
-        return res.status(200).json(accessToken);
+        const role = user['role'];
+        return res.status(200).json({accessToken,role});
     } catch(error){
         return res.status(500).json(error);
     }

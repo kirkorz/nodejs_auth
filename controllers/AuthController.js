@@ -41,16 +41,18 @@ let signup = async(req,res) =>{
         const result = await Dbquery.singup(req.body.username, req.body.email, req.body.name, req.body.password, req.body.avatar, req.body.country, req.body.city, req.body.phone, req.body.gender, req.body.age, req.body.role);
         return res.status(200).json(result);
     } catch(error){
+        console.log(error)
         return res.status(500).json(error);
     }
 }
 let login = async(req,res) =>{
     try{
-        const user = await Dbquery.login(req.body);
+        const user = await Dbquery.login(req.body.username,req.body.password);
         const accessToken = await jwtHelper.generateToken(user,key.private,accessTokenLife);
         const role = user['role'];
         return res.status(200).json({accessToken,role});
     } catch(error){
+        console.log(error)
         return res.status(500).json(error);
     }
 }

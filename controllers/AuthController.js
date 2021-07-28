@@ -38,7 +38,7 @@ let geturl = ()=>{
 
 let signup = async(req,res) =>{
     try{
-        const result = await Dbquery.singup(req.body);
+        const result = await Dbquery.singup(req.body.username, req.body.email, req.body.name, req.body.password, req.body.avatar, req.body.country, req.body.city, req.body.phone, req.body.gender, req.body.age, req.body.role);
         return res.status(200).json(result);
     } catch(error){
         return res.status(500).json(error);
